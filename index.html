@@ -59,6 +59,7 @@
   .step { width:8px; height:8px; border-radius:50%; background:#D1D5DB; }
   .step.on { background:var(--lila); }
   .salida { position:absolute; top:52px; right:16px; z-index:5; background:rgba(255,255,255,.25); border:none; color:#fff; font-size:11px; font-weight:800; padding:6px 10px; border-radius:20px; cursor:pointer; }
+  .ayuda { position:absolute; top:52px; right:104px; z-index:5; background:rgba(255,255,255,.25); border:none; color:#fff; font-size:12px; font-weight:800; width:26px; height:26px; border-radius:50%; cursor:pointer; }
   .aviso { background:#FEF9C3; border-radius:12px; padding:12px; font-size:12.5px; color:#713F12; margin-top:10px; line-height:1.5; }
   .hash { font-family:monospace; font-size:10.5px; color:var(--gris); word-break:break-all; background:var(--lila-suave); padding:8px; border-radius:8px; margin-top:8px; }
   /* ciclo */
@@ -158,6 +159,7 @@
 
   <!-- DIARIO -->
   <div class="screen" id="diario">
+    <button class="ayuda" onclick="go('acerca')" title="Acerca de Lila">?</button>
     <button class="salida" onclick="lock()">🌸 CICLO</button>
     <div class="topbar"><h2>Tu diario</h2><p>3 registros · todos sellados 🛡️</p></div>
     <div class="content">
@@ -254,6 +256,31 @@
       <button onclick="go('diario')"><span class="ico">📓</span>Diario</button>
       <button class="on"><span class="ico">💡</span>Aprender</button>
       <button onclick="go('export')"><span class="ico">📤</span>Exportar</button>
+    </div>
+  </div>
+
+  <!-- ACERCA DE LILA -->
+  <div class="screen" id="acerca">
+    <div class="topbar"><h2>? · Acerca de Lila</h2><p>Qué es, por qué existe y tus preguntas</p></div>
+    <div class="content">
+      <div class="card"><b>🌸 ¿Qué es Lila?</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">Una app para mujeres que enfrentan acoso laboral. Te ayuda a <b>entender</b> qué es acoso, a <b>documentarlo</b> en un diario cifrado con valor de evidencia, y a <b>decidir</b> con calma qué hacer — si decides hacer algo. Por fuera es una app de ciclo y bienestar (y lo es de verdad): nadie que la vea sabrá lo que guarda.</p></div>
+      <div class="card"><b>💜 ¿Por qué se creó?</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">Porque el acoso laboral está tan normalizado que muchas no saben que lo viven. Porque frente al desbalance de poder, la palabra de una trabajadora rara vez basta sin evidencia. Y porque casi ninguna está tan sola como cree: quienes acosan suelen repetir con varias personas.</p></div>
+      <div class="card" style="border-left:4px solid var(--lila);"><b>Misión</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">Que ninguna mujer enfrente el acoso laboral sin claridad, sin evidencia y sin compañía.</p>
+        <b style="display:block; margin-top:10px;">Visión</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">Una América Latina donde el acoso en el trabajo deje de ser normal — y deje de ser impune.</p></div>
+      <div class="card"><b>Preguntas frecuentes</b>
+        <p style="font-size:13.5px; margin-top:8px; line-height:1.6;"><b>¿Quién puede leer mis registros?</b><br>Solo tú. Se cifran en tu teléfono antes de salir de él; ni siquiera el equipo de Lila puede leerlos.</p>
+        <p style="font-size:13.5px; margin-top:10px; line-height:1.6;"><b>¿Qué prueba el sello de tiempo?</b><br>Que tu registro existía en esa fecha y no fue alterado después. No certifica el contenido — su valor está en la consistencia de tu diario.</p>
+        <p style="font-size:13.5px; margin-top:10px; line-height:1.6;"><b>¿Lila denuncia por mí o contacta a alguien?</b><br>Nunca. Lila no comparte, no denuncia, no avisa. Todo lo decides tú.</p>
+        <p style="font-size:13.5px; margin-top:10px; line-height:1.6;"><b>¿Qué pasa si pierdo o me quitan el celular?</b><br>Tus registros sobreviven: hay respaldo cifrado en la nube y los recuperas con tu frase de recuperación en otro teléfono.</p>
+        <p style="font-size:13.5px; margin-top:10px; line-height:1.6;"><b>¿Y si alguien me obliga a abrir la app?</b><br>Usa tu código de bienestar: solo verá el ciclo. Nada revela que existe otra capa.</p>
+        <p style="font-size:13.5px; margin-top:10px; line-height:1.6;"><b>¿Sirve como prueba en un proceso?</b><br>Puede aportar: fechas exactas, patrón documentado e integridad verificable pesan. Antes de usarla, habla con una abogada (Aprender → módulo 4).</p>
+        <p style="font-size:13.5px; margin-top:10px; line-height:1.6;"><b>¿Cuánto cuesta?</b><br>Nada. Lila es gratuita, sin publicidad, y nunca vende tus datos. Es un proyecto social sin ánimo de lucro.</p>
+        <p style="font-size:13.5px; margin-top:10px; line-height:1.6;"><b>¿Estoy exagerando?</b><br>Si te lo estás preguntando, vale la pena mirarlo: empieza por el módulo 1 de Aprender. Registrar no te compromete a nada.</p></div>
+      <button class="btn ghost" onclick="go('diario')">← Volver</button>
     </div>
   </div>
 
