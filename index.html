@@ -147,13 +147,34 @@
           <div class="chip" onclick="this.classList.toggle('on')">💜 Con energía</div>
         </div>
       </div>
-      <button class="btn sec">+ Registrar periodo</button>
+      <button class="btn sec" id="btn-periodo" onclick="registrarPeriodo()">+ Registrar periodo</button>
+      <div class="card" style="margin-top:12px;"><b>💧 Tu registro reciente</b>
+        <p style="font-size:13px; color:var(--gris); margin-top:6px; line-height:1.7;">Último periodo: 8–12 de agosto (5 días)<br>Duración promedio del ciclo: 28 días<br>Síntomas más frecuentes: cólicos (día 1-2), cansancio</p></div>
     </div>
     <div class="navbar" id="nav-ciclo">
       <button class="on"><span class="ico">🌸</span>Ciclo</button>
       <button id="nav-diario-btn" style="display:none;" onclick="go('diario')"><span class="ico">📓</span>Diario</button>
       <button id="nav-aprende-btn" style="display:none;" onclick="go('aprende')"><span class="ico">💡</span>Aprender</button>
-      <button><span class="ico">⚙️</span>Ajustes</button>
+      <button onclick="go('ajustes')"><span class="ico">⚙️</span>Ajustes</button>
+    </div>
+  </div>
+
+  <!-- AJUSTES -->
+  <div class="screen" id="ajustes">
+    <div class="topbar"><h2>Ajustes</h2><p>Tu app, a tu manera</p></div>
+    <div class="content">
+      <div class="card" style="display:flex; justify-content:space-between; align-items:center;"><div><b>Recordatorio de registro diario</b><p style="font-size:12.5px; color:var(--gris);">Un toque discreto, sin mencionar nada</p></div><div class="chip on" onclick="this.classList.toggle('on'); this.textContent=this.classList.contains('on')?'Sí':'No';">Sí</div></div>
+      <div class="card" style="display:flex; justify-content:space-between; align-items:center;"><div><b>Predicción de ciclo</b><p style="font-size:12.5px; color:var(--gris);">Calcular con tus últimos 6 ciclos</p></div><div class="chip on" onclick="this.classList.toggle('on'); this.textContent=this.classList.contains('on')?'Sí':'No';">Sí</div></div>
+      <div class="card"><b>Cambiar mis códigos</b><p style="font-size:12.5px; color:var(--gris);">Código de bienestar y código privado</p></div>
+      <div class="card"><b>Frase de recuperación</b><p style="font-size:12.5px; color:var(--gris);">Ver o regenerar tus 12 palabras</p></div>
+      <button class="btn" onclick="bloquear()">🔒 Bloquear Lila</button>
+      <button class="btn ghost" onclick="go('ciclo')">← Volver</button>
+    </div>
+    <div class="navbar">
+      <button onclick="go('ciclo')"><span class="ico">🌸</span>Ciclo</button>
+      <button id="nav-diario-btn2" style="display:none;" onclick="go('diario')"><span class="ico">📓</span>Diario</button>
+      <button id="nav-aprende-btn2" style="display:none;" onclick="go('aprende')"><span class="ico">💡</span>Aprender</button>
+      <button class="on"><span class="ico">⚙️</span>Ajustes</button>
     </div>
   </div>
 
@@ -210,7 +231,9 @@
       <label>Testigos (opcional)</label>
       <input type="text" placeholder="¿Alguien lo vio o escuchó?">
       <label>Adjuntos</label>
-      <button class="btn sec" style="margin-top:2px;">📎 Foto · captura · audio</button>
+      <button class="btn sec" style="margin-top:2px;">📎 Foto · captura de pantalla</button>
+      <button class="btn sec" id="btn-grabar" onclick="grabar()" style="margin-top:8px;">🎙️ Grabar audio</button>
+      <div class="aviso" style="margin-top:8px;">⚖️ Grabar una conversación <b>en la que tú participas</b> es legal en Colombia y puede servir como prueba. No grabes conversaciones ajenas: eso sí es ilegal.</div>
       <button class="btn" onclick="go('sellando')">Guardar y sellar 🛡️</button>
       <button class="btn ghost" onclick="go('diario')">Cancelar</button>
     </div>
@@ -408,6 +431,7 @@
       </div>
       <div class="aviso">⚖️ Piénsalo con calma. Puedes hablar primero con una abogada o una línea de ayuda (Aprender → módulo 5). Exportar no envía nada a nadie: genera un archivo que queda en tus manos.</div>
       <button class="btn">Generar paquete de evidencia</button>
+      <button class="btn sec" onclick="window.open('Paquete_Evidencia_Ejemplo_Lila.pdf','_blank')">👀 Ver un ejemplo del paquete (PDF)</button>
       <button class="btn ghost" onclick="go('diario')">← Volver</button>
     </div>
     <div class="navbar">
@@ -452,9 +476,39 @@
   }
   function lock() {
     // "salida rápida": vuelve a la cara pública (ciclo) y oculta el modo completo
-    document.getElementById('nav-diario-btn').style.display = 'none';
-    document.getElementById('nav-aprende-btn').style.display = 'none';
+    ['nav-diario-btn','nav-aprende-btn','nav-diario-btn2','nav-aprende-btn2'].forEach(id => {
+      const el = document.getElementById(id); if (el) el.style.display = 'none';
+    });
     go('ciclo');
+  }
+  function bloquear() {
+    // bloqueo total: vuelve a la pantalla de código
+    lock();
+    go('pin');
+  }
+  function registrarPeriodo() {
+    const b = document.getElementById('btn-periodo');
+    b.textContent = '✓ Periodo registrado hoy';
+    b.style.background = '#D1FAE5'; b.style.color = 'var(--verde)'; b.style.borderColor = '#D1FAE5';
+  }
+  let grabando = false, cronometro = null, segundos = 0;
+  function grabar() {
+    const b = document.getElementById('btn-grabar');
+    grabando = !grabando;
+    if (grabando) {
+      segundos = 0;
+      b.style.background = '#FEE2E2'; b.style.color = '#DC2626'; b.style.borderColor = '#FCA5A5';
+      cronometro = setInterval(() => {
+        segundos++;
+        const m = Math.floor(segundos/60), s = String(segundos%60).padStart(2,'0');
+        b.textContent = '⏺ Grabando ' + m + ':' + s + ' — toca para detener';
+      }, 1000);
+      b.textContent = '⏺ Grabando 0:00 — toca para detener';
+    } else {
+      clearInterval(cronometro);
+      b.style.background = '#fff'; b.style.color = 'var(--lila)'; b.style.borderColor = 'var(--lila)';
+      b.textContent = '✓ Audio adjuntado (' + Math.max(segundos,1) + ' seg) — 🎙️ grabar otro';
+    }
   }
   function pin(d) {
     entered += d;
@@ -466,8 +520,9 @@
         if (code === '1111') {           // código de bienestar: solo ciclo
           lock();
         } else if (code === '1234') {    // código privado: modo completo
-          document.getElementById('nav-diario-btn').style.display = '';
-          document.getElementById('nav-aprende-btn').style.display = '';
+          ['nav-diario-btn','nav-aprende-btn','nav-diario-btn2','nav-aprende-btn2'].forEach(id => {
+            const el = document.getElementById(id); if (el) el.style.display = '';
+          });
           if (firstFull) { firstFull = false; go('onb1'); } else { go('diario'); }
         }
         // cualquier otro código: se queda en el PIN (sin mensaje de error revelador)
