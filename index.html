@@ -80,6 +80,12 @@
 <h1 class="titulo">Lila — Prototipo navegable</h1>
 <p class="nota">Lila se presenta como app de ciclo y bienestar (¡y lo es!). <b>Doble código:</b> escribe <b>1111</b> para el modo ciclo (lo que ve cualquiera) o <b>1234</b> para el modo completo con el diario. La primera vez pasa por el onboarding.</p>
 
+<div style="width:390px; background:#fff; border-radius:16px; padding:18px 18px 8px; box-shadow:0 2px 8px rgba(0,0,0,.08);">
+  <b style="font-size:14px; color:var(--texto);">💬 ¿Qué mejorarías de Lila?</b>
+  <p style="font-size:12.5px; color:var(--gris); margin:6px 0 10px; line-height:1.5;">Tu opinión construye esta app — el comentario es anónimo.</p>
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfCiLqNK5qVeMCZFZXCiD2Tpnug1coezxKMhJHqZCvf9risFQ/viewform?embedded=true" width="100%" height="360" frameborder="0" marginheight="0" marginwidth="0" style="border-radius:10px;">Cargando…</iframe>
+</div>
+
 <div class="phone">
 
   <!-- PIN (entrada) -->
@@ -117,7 +123,7 @@
   <div class="screen" id="onb3"><div class="onb">
     <div class="emoji">🛡️</div>
     <h3>Tu diario, tu evidencia, tu decisión</h3>
-    <p>Cada registro del diario se guarda <b>cifrado en tu teléfono</b> y recibe un <b>sello de tiempo independiente</b> que prueba que existía en esa fecha y no fue alterado. Nadie —ni siquiera nosotras— puede leerlo. Y Lila nunca comparte nada: si algún día quieres usar tu evidencia, la exportas tú.</p>
+    <p>Cada registro se <b>cifra en tu teléfono</b> antes de salir de él, se <b>respalda cifrado</b> en la nube de Lila —así no pierdes nada si pierdes el celular— y recibe un <b>sello de tiempo independiente</b> que prueba que existía en esa fecha y no fue alterado. Nadie —ni siquiera nosotras— puede leerlo. Si algún día quieres usar tu evidencia, la exportas tú.</p>
     <div class="aviso">⚖️ Honestidad: el sello prueba <b>fecha e integridad</b>, no certifica el contenido. Su valor está en la consistencia de tu diario.</div>
     <div class="steps"><div class="step"></div><div class="step"></div><div class="step on"></div></div>
     <button class="btn" onclick="go('diario')">Entrar a mi espacio</button>
@@ -218,7 +224,7 @@
     <div class="emoji">🛡️</div>
     <h3>Guardado y sellado</h3>
     <p>Tu registro quedó cifrado en tu teléfono. Su huella digital fue sellada por una autoridad de tiempo independiente.</p>
-    <div class="hash">SHA-256: 888149d96c3d3fa820090c5757b9cf0c…<br>Sello: OpenTimestamps · 16 ago 2026, 09:10 GMT-5 · confirmación en cadena ~2h</div>
+    <div class="hash">SHA-256: 888149d96c3d3fa820090c5757b9cf0c…<br>Sello: OpenTimestamps · 16 ago 2026, 09:10 GMT-5 · confirmación en cadena ~2h<br>☁️ Respaldo cifrado sincronizado — recuperable si cambias de teléfono</div>
     <button class="btn" onclick="go('diario')">Volver al diario</button>
   </div></div>
 
@@ -242,17 +248,130 @@
     <button class="salida" onclick="lock()">🌸 CICLO</button>
     <div class="topbar"><h2>Aprender</h2><p>3 minutos por módulo, a tu ritmo · Colombia 🇨🇴</p></div>
     <div class="content">
-      <div class="card"><b>1 · ¿Esto es acoso laboral?</b><p style="font-size:13px;color:var(--gris);">Lo que la ley llama acoso (y lo que no). El acoso sexual cuenta desde la primera vez.</p></div>
-      <div class="card"><b>2 · Los tipos de acoso</b><p style="font-size:13px;color:var(--gris);">Las 6 modalidades de la Ley 1010 + el acoso sexual, que es delito.</p></div>
-      <div class="card"><b>3 · Tus derechos en Colombia</b><p style="font-size:13px;color:var(--gris);">Ley 1010, Ley 2365 de 2024, Convenio 190. Protección contra represalias y el plazo de 6 meses.</p></div>
-      <div class="card"><b>4 · Tus opciones, con pros y contras</b><p style="font-size:13px;color:var(--gris);">Comité de convivencia, protocolo interno, MinTrabajo, Fiscalía, tutela, salida negociada.</p></div>
-      <div class="card"><b>5 · Cuidarte mientras tanto</b><p style="font-size:13px;color:var(--gris);">Líneas gratuitas (155, Púrpura), tu EPS, tu red. No estás sola: 1 de cada 3 en las Américas.</p></div>
+      <div class="card" onclick="go('mod1')" style="cursor:pointer;"><b>1 · ¿Esto es acoso laboral? →</b><p style="font-size:13px;color:var(--gris);">Lo que la ley llama acoso (y lo que no). El acoso sexual cuenta desde la primera vez.</p></div>
+      <div class="card" onclick="go('mod2')" style="cursor:pointer;"><b>2 · Los tipos de acoso →</b><p style="font-size:13px;color:var(--gris);">Las 6 modalidades de la Ley 1010 + el acoso sexual, que es delito.</p></div>
+      <div class="card" onclick="go('mod3')" style="cursor:pointer;"><b>3 · Tus derechos en Colombia →</b><p style="font-size:13px;color:var(--gris);">Ley 1010, Ley 2365 de 2024, Convenio 190. Protección contra represalias y el plazo de 6 meses.</p></div>
+      <div class="card" onclick="go('mod4')" style="cursor:pointer;"><b>4 · Tus opciones, con pros y contras →</b><p style="font-size:13px;color:var(--gris);">Comité de convivencia, protocolo interno, MinTrabajo, Fiscalía, tutela, salida negociada.</p></div>
+      <div class="card" onclick="go('mod5')" style="cursor:pointer;"><b>5 · Cuidarte mientras tanto →</b><p style="font-size:13px;color:var(--gris);">Líneas gratuitas (155, Púrpura), tu EPS, tu red. No estás sola: 1 de cada 3 en las Américas.</p></div>
     </div>
     <div class="navbar">
       <button onclick="go('ciclo')"><span class="ico">🌸</span>Ciclo</button>
       <button onclick="go('diario')"><span class="ico">📓</span>Diario</button>
       <button class="on"><span class="ico">💡</span>Aprender</button>
       <button onclick="go('export')"><span class="ico">📤</span>Exportar</button>
+    </div>
+  </div>
+
+  <!-- MÓDULO 1 -->
+  <div class="screen" id="mod1">
+    <div class="topbar"><h2>1 · ¿Esto es acoso laboral?</h2><p>3 min de lectura</p></div>
+    <div class="content">
+      <div class="card"><b>Empecemos por lo importante</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">Si algo en tu trabajo te hace sentir miedo, humillación o angustia de forma repetida, eso tiene nombre. No es "el carácter del jefe". No es "así es este trabajo". Y no es tu culpa.</p></div>
+      <div class="card"><b>Qué dice la ley</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">En Colombia, el acoso laboral es <b>toda conducta persistente y demostrable</b> ejercida por tu jefe, un superior, un compañero o incluso un subalterno, <b>encaminada a infundir miedo, intimidación o angustia, causarte perjuicio laboral, desmotivarte o inducirte a renunciar</b> (Ley 1010 de 2006).</p>
+        <p style="font-size:14px; margin-top:8px; line-height:1.6;">Desde 2025, Colombia hace parte del Convenio 190 de la OIT, que protege frente a comportamientos inaceptables —<b>sucedan una vez o repetidamente</b>— que causen o puedan causar daño físico, psicológico, sexual o económico en el trabajo.</p></div>
+      <div class="card" style="border-left:4px solid var(--lila);"><b>Dos claves que casi nadie sabe</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">• Para el acoso laboral general, la ley pide que la conducta sea <b>persistente</b>. Por eso tu diario importa: un patrón documentado vale más que un recuerdo aislado.<br><br>• El <b>acoso sexual es distinto</b>: basta que ocurra <b>una sola vez</b> para estar protegida (Ley 2365 de 2024).</p></div>
+      <div class="card"><b>Qué NO es acoso laboral</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">Las exigencias razonables de tu jefe, las evaluaciones de desempeño o los llamados de atención con respeto <b>no</b> son acoso. El acoso no es exigencia: es hostilidad.</p></div>
+      <div class="aviso">💜 ¿No estás segura de si lo que viviste "cuenta"? Regístralo de todas formas. Muchas mujeres descubren el patrón solo cuando releen su diario.</div>
+      <p style="font-size:11px; color:#9CA3AF; margin-top:10px;">Fuentes: Ley 1010 de 2006 (arts. 2 y 8) · Ley 2528 de 2025 (Convenio 190 OIT) · Ley 2365 de 2024</p>
+      <button class="btn ghost" onclick="go('aprende')">← Volver a Aprender</button>
+    </div>
+  </div>
+
+  <!-- MÓDULO 2 -->
+  <div class="screen" id="mod2">
+    <div class="topbar"><h2>2 · Los tipos de acoso</h2><p>3 min de lectura</p></div>
+    <div class="content">
+      <div class="card"><b>Las 6 modalidades de la Ley 1010</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.7;">
+        <b>1. Maltrato:</b> gritos, insultos, humillaciones públicas.<br>
+        <b>2. Persecución:</b> descalificación constante, sobrecarga, cambios de horario para hacerte renunciar.<br>
+        <b>3. Discriminación:</b> trato desigual por ser mujer, tu edad, origen, orientación sexual u opinión.<br>
+        <b>4. Entorpecimiento:</b> te ocultan información, te "pierden" documentos, te dejan fuera de reuniones clave.<br>
+        <b>5. Inequidad:</b> funciones que menosprecian tus capacidades, como castigo disfrazado.<br>
+        <b>6. Desprotección:</b> órdenes que ponen en riesgo tu integridad sin condiciones de seguridad.</p></div>
+      <div class="card" style="border-left:4px solid var(--rosa);"><b>El acoso sexual: categoría propia y más grave</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">Todo acto de connotación sexual no deseado: comentarios sobre tu cuerpo, insinuaciones, mensajes o fotos no solicitadas, contacto físico no consentido, o condicionar tu trabajo a favores sexuales. Puede venir de un jefe, compañero, cliente o contratista, y <b>basta una sola vez</b> (Ley 2365 de 2024).</p>
+        <p style="font-size:14px; margin-top:8px; line-height:1.6;">Además, es <b>un delito</b>: 1 a 3 años de prisión (Código Penal, art. 210A).</p></div>
+      <div class="card"><b>Las direcciones del acoso</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">Puede ser <b>descendente</b> (de un jefe), <b>horizontal</b> (de colegas) o <b>ascendente</b> (de subalternos hacia una jefa — más común contra mujeres líderes de lo que se cree).</p></div>
+      <div class="aviso">💜 Al registrar, elige el tipo que mejor describa lo que pasó. Si no sabes cuál, usa "No estoy segura": lo importante es el registro, no la etiqueta perfecta.</div>
+      <p style="font-size:11px; color:#9CA3AF; margin-top:10px;">Fuentes: Ley 1010 de 2006, art. 2 · Ley 2365 de 2024 · Código Penal art. 210A (Ley 1257 de 2008)</p>
+      <button class="btn ghost" onclick="go('aprende')">← Volver a Aprender</button>
+    </div>
+  </div>
+
+  <!-- MÓDULO 3 -->
+  <div class="screen" id="mod3">
+    <div class="topbar"><h2>3 · Tus derechos en Colombia</h2><p>4 min de lectura</p></div>
+    <div class="content">
+      <div class="card"><b>Tienes más protección de la que crees</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.7;">
+        <b>Ley 1010 de 2006:</b> obliga a toda empresa a prevenir y corregir el acoso laboral, con rutas de queja dentro y fuera de ella.<br><br>
+        <b>Ley 2365 de 2024:</b> tu empleador debe tener <b>protocolo y ruta de atención</b> contra el acoso sexual, y protegerte de forma <b>inmediata</b> mientras investiga (p. ej., separarte del agresor sin desmejorar tu cargo). Aplica también si eres contratista, practicante o pasante.<br><br>
+        <b>Convenio 190 OIT (Ley 2528 de 2025):</b> derecho a un trabajo libre de violencia y acoso, incluida la violencia de género. Te cubre siendo informal, aprendiz o aspirante, y también en desplazamientos, eventos o por medios digitales.</p></div>
+      <div class="card" style="border-left:4px solid var(--verde);"><b>🛡️ Protección contra represalias</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">Si presentas una queja y te despiden o desmejoran <b>dentro de los 6 meses siguientes</b>, la ley <b>presume que fue represalia</b>: es el empleador quien debe demostrar lo contrario (Ley 1010, art. 11). Denunciar te da un escudo.</p></div>
+      <div class="card" style="border-left:4px solid var(--ambar);"><b>⏰ El plazo que debes conocer</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">Las acciones por acoso laboral <b>caducan a los 6 meses</b> de ocurridas las conductas (Ley 1010, art. 18). Documentar a tiempo preserva tus opciones. (El delito de acoso sexual tiene plazos penales más largos.)</p></div>
+      <div class="card"><b>Tu evidencia vale</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">En Colombia es <b>legal grabar una conversación en la que tú participas</b> para probar lo que te pasa. Tus registros fechados, mensajes, correos y testigos construyen la "demostrabilidad" que pide la ley. Ojo: grabar conversaciones ajenas sí es ilegal.</p></div>
+      <div class="card"><b>Si es urgente: la tutela</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">Cuando el acoso afecta tu dignidad, salud o intimidad y nada responde a tiempo, la <b>acción de tutela</b> se presenta ante cualquier juez, sin abogado, y se resuelve en ~10 días hábiles.</p></div>
+      <p style="font-size:11px; color:#9CA3AF; margin-top:10px;">Fuentes: Ley 1010 de 2006 (arts. 9, 11, 18) · Ley 2365 de 2024 · Ley 2528 de 2025 · Defensoría del Pueblo</p>
+      <button class="btn ghost" onclick="go('aprende')">← Volver a Aprender</button>
+    </div>
+  </div>
+
+  <!-- MÓDULO 4 -->
+  <div class="screen" id="mod4">
+    <div class="topbar"><h2>4 · Tus opciones</h2><p>Con sus pros y contras, sin presión</p></div>
+    <div class="content">
+      <p style="font-size:13.5px; color:var(--gris); margin-bottom:12px; line-height:1.5;">Ninguna ruta es obligatoria y ninguna es "la correcta". Conócelas todas y decide tú — con tu diario como respaldo en cualquiera.</p>
+      <div class="card"><b>1 · Comité de Convivencia (en tu empresa)</b>
+        <p style="font-size:13.5px; margin-top:6px; line-height:1.6;">Recibe quejas de acoso laboral de forma confidencial y busca acuerdos.<br><b style="color:var(--verde);">Pros:</b> rápido, sin abogados, deja constancia formal (activa tu escudo antirrepresalias).<br><b style="color:var(--ambar);">Contras:</b> concilia, no sanciona; depende de la empresa.<br><b>Ojo:</b> desde 2025 <b>no tramita acoso sexual</b> — porque el acoso sexual no se concilia.</p></div>
+      <div class="card"><b>2 · Protocolo de acoso sexual (Ley 2365)</b>
+        <p style="font-size:13.5px; margin-top:6px; line-height:1.6;">Tu empleador está obligado a tener una ruta con protección inmediata para ti.<br><b style="color:var(--verde);">Pros:</b> protección inmediata; sanciones si no la aplica.<br><b style="color:var(--ambar);">Contras:</b> es reciente; si no funciona, pasa a las rutas externas.</p></div>
+      <div class="card"><b>3 · Inspección de Trabajo — MinTrabajo</b>
+        <p style="font-size:13.5px; margin-top:6px; line-height:1.6;">Queja ante el inspector de tu municipio. Líneas: <b>018000 112518</b> · (601) 377 9999.<br><b style="color:var(--verde);">Pros:</b> externa e independiente; puede sancionar.<br><b style="color:var(--ambar);">Contras:</b> tiempos largos; lleva tu evidencia organizada.</p></div>
+      <div class="card"><b>4 · Fiscalía — cuando es delito</b>
+        <p style="font-size:13.5px; margin-top:6px; line-height:1.6;">Acoso sexual, agresión física y amenazas se denuncian ante la Fiscalía (adenunciar.fiscalia.gov.co).<br><b style="color:var(--verde);">Pros:</b> puede sancionar penalmente; no depende de tu empresa.<br><b style="color:var(--ambar);">Contras:</b> proceso exigente y largo; hazte acompañar.</p></div>
+      <div class="card"><b>5 · Acción de tutela</b>
+        <p style="font-size:13.5px; margin-top:6px; line-height:1.6;">Protección urgente de derechos fundamentales, ante cualquier juez, sin abogado, ~10 días.</p></div>
+      <div class="card"><b>6 · Juez laboral / renuncia con justa causa</b>
+        <p style="font-size:13.5px; margin-top:6px; line-height:1.6;">Si el acoso comprobado te obliga a renunciar, puede haber <b>indemnización</b> como despido injusto (Ley 1010, art. 10). Aquí necesitas abogada — y aquí tu diario sellado vale oro.</p></div>
+      <div class="card"><b>7 · Salida negociada</b>
+        <p style="font-size:13.5px; margin-top:6px; line-height:1.6;">Negociar una salida digna (indemnización, recomendación, no represalias) es legítimo. No es rendirse. Y con evidencia en la mano, es una negociación muy distinta.</p></div>
+      <div class="aviso">📓 En todas las rutas te preguntarán: <b>¿qué pasó, cuándo, quién, quién lo vio?</b> Tu diario responde eso con fechas exactas y sello de integridad. Documentar hoy es darte opciones mañana.</div>
+      <p style="font-size:11px; color:#9CA3AF; margin-top:10px;">Fuentes: Resolución 3461 de 2025 · Ley 2365 de 2024 · MinTrabajo · LegalApp MinJusticia · Ley 1010, art. 10</p>
+      <button class="btn ghost" onclick="go('aprende')">← Volver a Aprender</button>
+    </div>
+  </div>
+
+  <!-- MÓDULO 5 -->
+  <div class="screen" id="mod5">
+    <div class="topbar"><h2>5 · Cuidarte mientras tanto</h2><p>Esto también es parte de resistir</p></div>
+    <div class="content">
+      <div class="card"><b>Lo que vives afecta la salud — y no es debilidad</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">El acoso sostenido produce ansiedad, insomnio, agotamiento, dolores físicos. Es una respuesta normal a una situación anormal. Cuidarte no es un lujo mientras decides qué hacer.</p></div>
+      <div class="card" style="border-left:4px solid var(--lila);"><b>No estás sola — literalmente</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">En las Américas, <b>1 de cada 3 personas trabajadoras</b> ha vivido violencia o acoso en el trabajo, y <b>casi 1 de cada 5 mujeres</b> ha sufrido violencia o acoso sexual laboral (OIT, 2022). Quienes acosan suelen repetir su conducta. El silencio nos hace sentir únicas; los datos muestran lo contrario.</p></div>
+      <div class="card"><b>📞 Líneas gratuitas en Colombia</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.8;">
+        <b>155</b> — orientación nacional para mujeres, 24/7<br>
+        <b>Línea Púrpura (Bogotá): 018000 112 137</b> — apoyo psicosocial 24/7 · WhatsApp 300 755 1846<br>
+        <b>MinTrabajo: 018000 112518</b> — orientación laboral<br>
+        <b>123</b> — si estás en riesgo ahora mismo</p></div>
+      <div class="card"><b>Apoyo psicológico formal</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">Tu <b>EPS</b> cubre salud mental: pide cita con psicología — no necesitas "estar muy mal" para ir. Si el estrés viene del trabajo, tu <b>ARL</b> cubre la atención del riesgo psicosocial; tu médico puede activar esa ruta.</p></div>
+      <div class="card"><b>Tu red</b>
+        <p style="font-size:14px; margin-top:6px; line-height:1.6;">Cuéntale a alguien de confianza. No para que "haga algo", sino para no cargar esto sola. Contarlo con tu diario en la mano ayuda: tendrás claridad y fechas, no solo angustia.</p></div>
+      <div class="aviso">💜 Registrar también es autocuidado: poner en palabras lo que pasa ayuda a ordenar la experiencia y recuperar sensación de control. Este espacio es tuyo, es privado, y está de tu lado.</div>
+      <p style="font-size:11px; color:#9CA3AF; margin-top:10px;">Fuentes: OIT/LRF/Gallup (2022) · Consejería Presidencial para la Equidad de la Mujer · Alcaldía de Bogotá</p>
+      <button class="btn ghost" onclick="go('aprende')">← Volver a Aprender</button>
     </div>
   </div>
 
