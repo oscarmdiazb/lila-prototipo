@@ -80,12 +80,6 @@
 <h1 class="titulo">Lila — Prototipo navegable</h1>
 <p class="nota">Lila se presenta como app de ciclo y bienestar (¡y lo es!). <b>Doble código:</b> escribe <b>1111</b> para el modo ciclo (lo que ve cualquiera) o <b>1234</b> para el modo completo con el diario. La primera vez pasa por el onboarding.</p>
 
-<div style="width:390px; background:#fff; border-radius:16px; padding:18px 18px 8px; box-shadow:0 2px 8px rgba(0,0,0,.08);">
-  <b style="font-size:14px; color:var(--texto);">💬 ¿Qué mejorarías de Lila?</b>
-  <p style="font-size:12.5px; color:var(--gris); margin:6px 0 10px; line-height:1.5;">Tu opinión construye esta app — el comentario es anónimo.</p>
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfCiLqNK5qVeMCZFZXCiD2Tpnug1coezxKMhJHqZCvf9risFQ/viewform?embedded=true" width="100%" height="360" frameborder="0" marginheight="0" marginwidth="0" style="border-radius:10px;">Cargando…</iframe>
-</div>
-
 <div class="phone">
 
   <!-- PIN (entrada) -->
@@ -397,6 +391,30 @@
   </div>
 
 </div>
+
+<div id="fb-box" style="width:390px; background:#fff; border-radius:16px; padding:18px; box-shadow:0 2px 8px rgba(0,0,0,.08); margin-top:8px;">
+  <b style="font-size:14px; color:var(--texto);">💬 ¿Qué mejorarías de Lila?</b>
+  <p style="font-size:12.5px; color:var(--gris); margin:6px 0 10px; line-height:1.5;">Tu opinión construye esta app — el comentario es anónimo.</p>
+  <textarea id="fb-texto" placeholder="Escribe aquí tus comentarios…" style="width:100%; min-height:90px; padding:12px; border:1.5px solid #D1D5DB; border-radius:12px; font-size:14px; font-family:'Nunito',sans-serif; resize:vertical; box-sizing:border-box;"></textarea>
+  <button onclick="enviarFeedback()" id="fb-btn" style="width:100%; padding:13px; border:none; border-radius:12px; background:var(--lila); color:#fff; font-size:15px; font-weight:700; cursor:pointer; margin-top:10px; font-family:'Nunito',sans-serif;">Enviar</button>
+</div>
+<script>
+  async function enviarFeedback() {
+    const ta = document.getElementById('fb-texto');
+    const texto = ta.value.trim();
+    if (!texto) { ta.focus(); return; }
+    const datos = new FormData();
+    datos.append('entry.381796541', texto);
+    try {
+      await fetch('https://docs.google.com/forms/d/e/1FAIpQLSfCiLqNK5qVeMCZFZXCiD2Tpnug1coezxKMhJHqZCvf9risFQ/formResponse',
+        { method: 'POST', mode: 'no-cors', body: datos });
+    } catch (e) {}
+    document.getElementById('fb-box').innerHTML =
+      '<div style="text-align:center; padding:14px 6px;"><div style="font-size:34px;">💜</div>' +
+      '<b style="font-size:15px; color:var(--texto);">¡Gracias por tu comentario!</b>' +
+      '<p style="font-size:12.5px; color:var(--gris); margin-top:6px;">Cada opinión hace a Lila mejor y más segura.</p></div>';
+  }
+</script>
 
 <script>
   let entered = "", firstFull = true;
